@@ -131,3 +131,4 @@ export DEVKITPPC=/opt/devkitpro/devkitPPC
 export PATH="$PATH:/home/hidenori/.local/bin"
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
+export PATH="$PATH:/home/hidenori/.local/ubin"

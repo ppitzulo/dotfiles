@@ -19,4 +19,6 @@
     ~/.config/polybar:
         path: config/polybar/
         create: true
-
+    ~/.local/ubin:
+        path: .local/ubin/
+        create: true
