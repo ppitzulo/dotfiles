@@ -20,5 +20,8 @@
         path: config/polybar/
         create: true
     ~/.local/ubin:
-        path: .local/ubin/
+        path: ubin/
         create: true
+    ~/.config/yakuakerc:
+        path: yakuakerc/
+        force: true

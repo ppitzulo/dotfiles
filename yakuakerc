@@ -1,0 +1,18 @@
+[Desktop Entry]
+DefaultProfile=Profile 1.profile
+
+[Dialogs]
+FirstRun=false
+
+[Shortcuts]
+close-active-terminal=Ctrl+W
+next-session=Ctrl+PgDown
+next-terminal=Ctrl+Shift+PgUp
+previous-session=Ctrl+PgUp
+previous-terminal=Ctrl+Shift+PgDown
+split-left-right=Ctrl+V
+split-top-bottom=Ctrl+H
+view-full-screen=F11
+
+[Window]
+Width=100
