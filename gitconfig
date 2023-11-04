@@ -1,0 +1,7 @@
+[user]
+	email = plpitzulo@protonmail.com
+	name = Peter Pitzulo
+[core]
+	editor = nano
+[init]
+	defaultBranch = main
