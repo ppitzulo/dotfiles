@@ -8,7 +8,9 @@
         create: true
     ~/.vimrc: vimrc
     ~/.zprofile: zprofile
-    ~/.zshrc: zshrc
+    ~/.zshrc: 
+        path: zshrc
+        force: true
     ~/.Xmodmap: Xmodmap
     ~/.Xresources: Xresources
     ~/.config/i3:

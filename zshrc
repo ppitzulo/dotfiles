@@ -112,8 +112,6 @@ if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
         source /etc/profile.d/vte.sh
 fi
 alias serp="sftp pongopeter826@192.168.0.2"
-export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
-export PATH="$PATH:$GEM_HOME/bin"
 
 alias emu="cd /home/hidenori/ImportantStuff/Programming/C/Intel-8080-emulator"
 alias zshrc="nano ~/.zshrc"
