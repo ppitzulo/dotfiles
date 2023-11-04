@@ -1,0 +1,77 @@
+#!/bin/python
+import requests
+from bs4 import BeautifulSoup
+import time
+import json
+import os
+
+# Dictionary to store the previous seat capacity for each CRN
+previous_capacity = {}
+
+# Get the home directory
+home = os.path.expanduser("~")
+
+# Define the directory path for storing the JSON file
+json_directory = os.path.join(home, ".local/share/classtracker")
+
+# Create the directory structure if it doesn't exist
+os.makedirs(json_directory, exist_ok=True)
+
+# Define the JSON file path
+json_path = os.path.join(json_directory, "previous_capacity.json")
+
+try:
+    with open(json_path, 'r') as file:
+        previous_capacity = json.load(file)
+except FileNotFoundError:
+	print("Creating new JSON file")
+	previous_capacity = {}
+
+def get_remaining_capacity(crn):
+    global previous_capacity
+
+    # Define the URL with the provided CRN
+    url = f'https://ssb.oci.ysu.edu/petessb/bwckschd.p_disp_detail_sched?term_in=202420&crn_in={crn}'
+
+    # Send a GET request to the URL
+    response = requests.get(url, headers={
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/119.0'
+    })
+
+    # Check if the request was successful
+    if response.status_code == 200:
+        # Parse the HTML content
+        soup = BeautifulSoup(response.text, 'html.parser')
+
+        # Find all elements with the class 'dddefault'
+        dddefault_elements = soup.find_all('td', class_='dddefault')
+        name = soup.find_all(class_='ddlabel')[0]
+
+        # Extract the text content from the elements
+        remaining_capacity = dddefault_elements[3]
+
+        if remaining_capacity:
+            current_capacity = int(remaining_capacity.text)
+            if crn in previous_capacity:
+                difference = current_capacity - previous_capacity[crn]
+                print(f"Course: {name.text} - CRN {crn} - Remaining Seat Capacity: {current_capacity} (Difference: {difference})")
+            else:
+                print(f"Course: {name.text} - CRN {crn} - Remaining Seat Capacity: {current_capacity}")
+            previous_capacity[crn] = current_capacity
+        else:
+            print("Seat capacity information not found on the page.")
+    else:
+        print(f"Failed to retrieve the page for CRN {crn}. Status code:", response.status_code)
+
+    # Save the updated previous capacity values to the JSON file
+    with open(json_path, 'w') as file:
+        json.dump(previous_capacity, file)
+
+# List of CRN values
+crn_values = ["21858", "20781", "21894", "22279", "21453", "22664", "24165", "21583"]
+
+# Iterate through the CRN values and call the function
+for crn in crn_values:
+    result = get_remaining_capacity(crn)
+    # Sleep for 2 seconds between calls
+    time.sleep(0.2)
