@@ -1,0 +1,32 @@
+- clean: ['~']
+
+- link:
+    ~/.bashrc: bashrc
+    ~/.gitconfig: gitconfig
+    ~/.ssh/config:
+        path: ssh/config
+        create: true
+    ~/.vimrc: vimrc
+    ~/.zprofile: zprofile
+    ~/.zshrc: 
+        path: zshrc
+        force: true
+    ~/.Xmodmap: Xmodmap
+    ~/.Xresources: Xresources
+    ~/.local/share/fonts: fonts
+      path: fonts
+      create: true
+      force: true
+    ~/.config/i3:
+        path: config/i3/
+        create: true
+    ~/.config/polybar:
+        path: config/polybar/
+        create: true
+        force: true
+    ~/.local/ubin:
+        path: ubin/
+        create: true
+    ~/.config/yakuakerc:
+        path: yakuakerc/
+        force: true

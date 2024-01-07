@@ -13,6 +13,10 @@
         force: true
     ~/.Xmodmap: Xmodmap
     ~/.Xresources: Xresources
+    ~/.local/share/fonts: fonts
+      path: fonts
+      create: true
+      force: true
     ~/.config/i3:
         path: config/i3/
         create: true
