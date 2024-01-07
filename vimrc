@@ -5,6 +5,10 @@ hi Normal guibg=NONE ctermbg=NONE
 nnoremap <leader>ff :FZF<CR>
 set tabstop=4
 set expandtab
+" Custom command to copy the entire file to the clipboard
+command! CopyFileToClipboard :%!xclip -selection clipboard
+" Map the custom command to a key combination (e.g., F2)
+nnoremap <F2> :CopyFileToClipboard<CR>
 
 call plug#begin()
 Plug 'preservim/nerdtree'

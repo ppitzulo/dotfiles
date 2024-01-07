@@ -122,6 +122,13 @@ alias vpnc="sudo wg-quick up peer2"
 alias vpnd="sudo wg-quick down peer2"
 alias vpns="sudo wg show"
 alias cdr="cd ~/Programming/React"
+alias upgrade="sudo pacman -Syu"
+alias cleancache="sudo pacman -Sc"
+alias enablenow="sudo systemctl enable --now"
+alias status="sudo systemctl status"
+alias disablenow="sudo systemctl disable"
+alias stop="sudo systemctl stop"
+alias start="sudo systemctl start"
 
 export DEVKITPRO=/opt/devkitpro
 export DEVKITARM=/opt/devkitpro/devkitARM

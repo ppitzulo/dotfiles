@@ -4,7 +4,7 @@
 read -p "Enter the new repo name (e.g., username/repo): " new_repo
 
 # Update the Git remote URLs with the user-provided repo name
-git remote add origin "https://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@github.com/$new_repo.git"
-git remote set-url origin "https://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@github.com/$new_repo.git"
+git remote add origin "https://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@github.com/ppitzulo/$new_repo.git"
+git remote set-url origin "https://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@github.com/ppitzulo/$new_repo.git"
 echo "Git remote URLs have been updated with the new repo name: $new_repo"
 
