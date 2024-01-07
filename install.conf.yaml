@@ -16,6 +16,7 @@
     ~/.config/i3:
         path: config/i3/
         create: true
+        force: true
     ~/.config/polybar:
         path: config/polybar/
         create: true
