@@ -1,9 +1,7 @@
 #!/bin/python
 import requests
 import re
-from bs4 import BeautifulSoup
 import xml.etree.ElementTree as ET
-from xml.dom import minidom
 from colorama import Fore, Style
 
 
@@ -15,11 +13,16 @@ def fetch_titles(url):
     namespace = {'atom': 'http://www.w3.org/2005/Atom'}
 
     titles = [entry.find('./atom:title', namespace).text for entry in root.findall('.//atom:entry', namespace)]
+    postDate = [entry.find('./atom:published', namespace).text for entry in root.findall('.//atom:entry', namespace)]
     pattern = re.compile(r'\[.*?\]|\$\d+\.\d+')
+    patternDate = re.compile(r'\d{4}-\d{2}-\d{2}.*T.*')
+    posts = list(zip(titles, postDate))
+
     # Print titles in reverse order
-    for title in reversed(titles):
-        formatted_title = pattern.sub(lambda match: f'{Fore.RED}{match.group()}{Style.RESET_ALL}' if '[' in match.group() else f'{Fore.GREEN}{match.group()}{Style.RESET_ALL}', title)
-        print(formatted_title)
+    for post in reversed(posts):
+        formatted_title = pattern.sub(lambda match: f'{Fore.RED}{match.group()}{Style.RESET_ALL}' if '[' in match.group() else f'{Fore.GREEN}{match.group()}{Style.RESET_ALL}', post[0])
+        date = patternDate.sub(lambda match: f'{Fore.CYAN}{match.group()}{Style.RESET_ALL}', post[1])
+        print(formatted_title + " " + date)
 
 if __name__ == '__main__':
     url = "https://www.reddit.com/r/buildapcsales/new/.rss?limit=50"
