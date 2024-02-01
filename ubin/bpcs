@@ -7,17 +7,20 @@ from xml.dom import minidom
 from colorama import Fore, Style
 
 
-headers = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0"}
+def fetch_titles(url):
+    headers = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0"}
 
-response = requests.get("https://www.reddit.com/r/buildapcsales/new/.rss?limit=50", headers=headers)
-root = ET.fromstring(response.content)
-dom = minidom.parseString(response.content)
-pretty_xml = dom.toprettyxml(indent="   ")
-namespace = {'atom': 'http://www.w3.org/2005/Atom'}
+    response = requests.get(url, headers=headers)
+    root = ET.fromstring(response.content)
+    namespace = {'atom': 'http://www.w3.org/2005/Atom'}
 
-titles = [entry.find('./atom:title', namespace).text for entry in root.findall('.//atom:entry', namespace)]
-pattern = re.compile(r'\[.*?\]|\$\d+\.\d+')
-# Print titles in reverse order
-for title in reversed(titles):
-    formatted_title = pattern.sub(lambda match: f'{Fore.RED}{match.group()}{Style.RESET_ALL}' if '[' in match.group() else f'{Fore.GREEN}{match.group()}{Style.RESET_ALL}', title)
-    print(formatted_title)
+    titles = [entry.find('./atom:title', namespace).text for entry in root.findall('.//atom:entry', namespace)]
+    pattern = re.compile(r'\[.*?\]|\$\d+\.\d+')
+    # Print titles in reverse order
+    for title in reversed(titles):
+        formatted_title = pattern.sub(lambda match: f'{Fore.RED}{match.group()}{Style.RESET_ALL}' if '[' in match.group() else f'{Fore.GREEN}{match.group()}{Style.RESET_ALL}', title)
+        print(formatted_title)
+
+if __name__ == '__main__':
+    url = "https://www.reddit.com/r/buildapcsales/new/.rss?limit=50"
+    fetch_titles(url)
