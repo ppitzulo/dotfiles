@@ -7,6 +7,9 @@
         path: ssh/config
         create: true
     ~/.vimrc: vimrc
+    ~/.config/nvim:
+      path: nvim
+      create: true
     ~/.zprofile: zprofile
     ~/.zshrc: 
         path: zshrc
