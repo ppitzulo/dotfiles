@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Check if a field separator is provided
+if [ -z "$1" ]; then
+    echo "Please provide a field separator as the first argument."
+    exit 1
+fi
+
+# Determine the input source
+if [ -t 0 ]; then
+    # No data piped, check for file argument
+    if [ -z "$2" ]; then
+        echo "No file provided and no data piped. Please provide a file or pipe data."
+        exit 1
+    elif [ ! -f "$2" ]; then
+        echo "File not found: $2"
+        exit 1
+    else
+        input="$2"
+    fi
+else
+    # Data is being piped
+    input="/dev/stdin"
+fi
+
+# Use awk to print the third field of each line using the provided field separator
+awk -F"$1" '{print $3}' "$input"
+

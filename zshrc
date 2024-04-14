@@ -129,6 +129,8 @@ alias status="sudo systemctl status"
 alias disablenow="sudo systemctl disable"
 alias stop="sudo systemctl stop"
 alias start="sudo systemctl start"
+alias packettracer="XDG_CURRENT_DESKTOP=GNOME /opt/packettracer/packettracer %f"
+alias ls="lsd"
 
 export DEVKITPRO=/opt/devkitpro
 export DEVKITARM=/opt/devkitpro/devkitARM

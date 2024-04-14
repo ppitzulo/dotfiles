@@ -8,14 +8,12 @@ DefaultProfile=Profile 1.profile
 FirstRun=false
 
 [Shortcuts]
-close-active-terminal=Ctrl+W
 next-session=Ctrl+PgDown
 next-terminal=Ctrl+J
 previous-session=Ctrl+PgUp
 previous-terminal=Ctrl+K
-split-left-right=Ctrl+V
-split-top-bottom=Ctrl+H
 view-full-screen=F11
 
 [Window]
+Height=53
 Width=100
