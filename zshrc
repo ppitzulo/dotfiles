@@ -131,6 +131,8 @@ alias stop="sudo systemctl stop"
 alias start="sudo systemctl start"
 alias packettracer="XDG_CURRENT_DESKTOP=GNOME /opt/packettracer/packettracer %f"
 alias ls="lsd"
+alias killkde="login terminate-session"
+alias listsesh="loginctl list-sessions"
 
 export DEVKITPRO=/opt/devkitpro
 export DEVKITARM=/opt/devkitpro/devkitARM
