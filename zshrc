@@ -111,13 +111,8 @@ alias update="sudo apt update && sudo apt upgrade"
 if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
         source /etc/profile.d/vte.sh
 fi
-alias serp="sftp pongopeter826@192.168.0.2"
 
-alias emu="cd /home/hidenori/ImportantStuff/Programming/C/Intel-8080-emulator"
 alias zshrc="nano ~/.zshrc"
-alias i3config="nano ~/.config/i3/config"
-alias datastruct="cd /home/hidenori/ImportantStuff/Programming/C++/Data_Structures"
-alias class="cd /home/hidenori/ImportantStuff/Programming/Java/class"
 alias vpnc="sudo wg-quick up peer2"
 alias vpnd="sudo wg-quick down peer2"
 alias vpns="sudo wg show"
@@ -133,13 +128,19 @@ alias packettracer="XDG_CURRENT_DESKTOP=GNOME /opt/packettracer/packettracer %f"
 alias ls="lsd"
 alias killkde="login terminate-session"
 alias listsesh="loginctl list-sessions"
+alias ls="lsd"
 
-export DEVKITPRO=/opt/devkitpro
-export DEVKITARM=/opt/devkitpro/devkitARM
-export DEVKITPPC=/opt/devkitpro/devkitPPC
+# WSL Configs
+
+if [[ "$HOSTNAME"  == "Bocchi" ]]; then
+  alias xclip="clip.exe"
+  alias windir="cd /mnt/c/Users/pongo" 
+  alias vlc="/mnt/c/Program\ Files/VideoLAN/VLC/vlc.exe"
+fi
 
 # Created by `pipx` on 2023-09-17 02:56:45
 export PATH="$PATH:/home/hidenori/.local/bin"
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 export PATH="$PATH:/home/hidenori/.local/ubin"
+
