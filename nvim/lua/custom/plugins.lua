@@ -39,18 +39,18 @@ local plugins = {
       vim.api.nvim_set_keymap('n', '<Leader>s', '<Plug>(easymotion-s2)', { noremap = true })
     end
   },
-  {
-    'mg979/vim-visual-multi',
-    lazy = false,
-    config = function()
-      vim.g.VM_maps = {
-        ["Find Under"] = "<C-m>",
-        ["Find Subword Under"] = "<C-m>",
-      }
-      vim.api.nvim_set_keymap('n', '<C-m>', '<Plug>(VM-Find-Under)', { noremap = true, silent = true })
-      vim.api.nvim_set_keymap('x', '<C-m>', '<Plug>(VM-Find-Subword-Under)', { noremap = true, silent = true })
-    end
-  },
+  -- {
+  --   'mg979/vim-visual-multi',
+  --   lazy = false,
+  --   config = function()
+  --     vim.g.VM_maps = {
+  --       ["Find Under"] = "<C-m>",
+  --       ["Find Subword Under"] = "<C-m>",
+  --     }
+  --     vim.api.nvim_set_keymap('n', '<C-m>', '<Plug>(VM-Find-Under)', { noremap = true, silent = true })
+  --     vim.api.nvim_set_keymap('x', '<C-m>', '<Plug>(VM-Find-Subword-Under)', { noremap = true, silent = true })
+  --   end
+  -- },
   {
     "themaxmarchuk/tailwindcss-colors.nvim",
     lazy = true,

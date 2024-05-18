@@ -8,13 +8,17 @@
         create: true
     ~/.vimrc: vimrc
     ~/.config/nvim:
-      path: nvim
-      create: true
+        path: nvim
+        create: true
     ~/.zprofile: zprofile
     ~/.zshrc: 
         path: zshrc
         force: true
     ~/.Xmodmap: Xmodmap
+    ~/.tmux.conf:
+        path: tmux.conf
+        create: true
+        force: true
     ~/.Xresources: Xresources
     ~/.local/share/fonts:
         path: fonts
