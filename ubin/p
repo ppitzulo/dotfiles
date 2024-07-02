@@ -1,0 +1,70 @@
+#!/bin/python
+import sys
+import re
+
+class HexCalc:
+    def __init__(self):
+        self.decimals = []
+        self.total = 0
+
+    def is_hex(self, value):
+        hex_pattern = re.compile(r'^0[xX][0-9a-fA-F]+$')
+        return bool(hex_pattern.match(value))
+
+    def is_dec(self, value):
+        try:
+            int(value, 10)
+            return True
+        except ValueError:
+            return False
+
+    def hex2dec(self):
+        for arg in sys.argv[1:]:
+            if self.is_hex(arg):
+                self.decimals.append(int(arg, 16))  # convert hex to int
+            elif self.is_dec(arg):
+                self.decimals.append(int(arg))  # just append int
+            elif arg == '-' or arg == '+':
+                self.decimals.append(arg)  # append the operator to the list
+            else:
+                print(f"Invalid number: {arg}")
+                sys.exit(1)
+                
+    def calc(self):
+        self.total = self.decimals[0]
+        for i in range(1, len(self.decimals), 2):
+            operator = self.decimals[i]
+            if i + 1 < len(self.decimals):
+                next_value = self.decimals[i + 1]
+                if operator == '+':
+                    self.total += next_value
+                elif operator == '-':
+                    self.total -= next_value
+
+    def run(self):
+        if len(sys.argv) < 2:
+            print("Usage: python3 p.py <number> <operation> <number>")
+            print("       python3 p.py -x <decimal_number>")
+            print("\nSupported operations:")
+            print("  - Add or subtract multiple hexadecimal or decimal numbers.")
+            print("  - Convert a single decimal number to hexadecimal using the -x flag.")
+            sys.exit(1)
+
+        if sys.argv[1] == '-x' and len(sys.argv) == 3:
+            if self.is_dec(sys.argv[2]):
+                print(hex(int(sys.argv[2])))
+            else:
+                print("Invalid decimal number")
+            sys.exit(0)
+        else:
+            self.hex2dec()
+            if self.decimals:
+                self.calc()
+                if '-x' in sys.argv:
+                    print(hex(self.total))
+                else:
+                    print(self.total)
+
+if __name__ == '__main__':
+    hexcalc = HexCalc()
+    hexcalc.run()
