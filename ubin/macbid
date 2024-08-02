@@ -1,0 +1,79 @@
+#!/bin/python
+import requests
+from datetime import datetime
+from prettytable import PrettyTable
+from colorama import Fore, Style
+
+def fetch_data():
+    url = 'https://xczkhpt94lod37gqp.a1.typesense.net/multi_search?x-typesense-api-key=jxX8RU6YVOkm9esgd9buaYjulIWv6N52'
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:126.0) Gecko/20100101 Firefox/126.0',
+        'Accept': 'application/json, text/plain, */*',
+        'Accept-Language': 'en-US,en;q=0.7,ja;q=0.3',
+        'Accept-Encoding': 'gzip, deflate, br, zstd',
+        'Content-Type': 'text/plain',
+        'Origin': 'https://www.mac.bid',
+        'DNT': '1',
+        'Connection': 'keep-alive',
+        'Referer': 'https://www.mac.bid/',
+        'Sec-Fetch-Dest': 'empty',
+        'Sec-Fetch-Mode': 'cors',
+        'Sec-Fetch-Site': 'cross-site',
+        'TE': 'trailers'
+    }
+    data = {
+        "searches": [
+            {
+                "query_by": "product_name,embedding,description,keywords,upc,inventory_id,auction_title",
+                "exclude_fields": "description,keywords,bid_delta,embedding",
+                "sort_by": "ranking_weight:desc",
+                "highlight_full_fields": "product_name,embedding,description,keywords,upc,inventory_id,auction_title",
+                "collection": "prod_macdiscount_alias",
+                "q": "*",
+                "facet_by": "auction_location,auction_number,box_size,category,condition,current_bid,expected_close_date,is_charity,is_open,is_pallet,is_partial,is_transferrable,retail_price,transfer_locations",
+                "filter_by": "category:=[`Electronics`] && is_open:=[1] && is_pallet:=[false] && is_partial:=[false] && transfer_locations:=[`Beaver Falls`,`Boardman`,`Warren`]",
+                "max_facet_values": 20,
+                "page": 1,
+                "per_page": 96
+            }
+        ]
+    }
+
+    response = requests.post(url, headers=headers, json=data)
+    return response.json()
+
+def format_time_delta(tdelta):
+    days, remainder = divmod(tdelta.total_seconds(), 86400)
+    hours, remainder = divmod(remainder, 3600)
+    minutes, seconds = divmod(remainder, 60)
+    return f"{int(days)}d {int(hours)}h {int(minutes)}m {int(seconds)}s"
+
+def print_product_info_sorted(data):
+    now = datetime.utcnow()
+    products = []
+    for result in data.get('results', []):
+        for hit in result.get('hits', []):
+            document = hit.get('document', {})
+            product_name = document.get('product_name', 'No product name')
+            current_bid = '$' + str(document.get('current_bid', 'No current bid'))
+            closing_utc = document.get('expected_closing_utc', None)
+            if closing_utc:
+                time_remaining = datetime.utcfromtimestamp(closing_utc) - now
+                formatted_time_left = format_time_delta(time_remaining) if time_remaining.total_seconds() > 0 else "Auction closed"
+            else:
+                formatted_time_left = "Unknown closing time"
+            products.append((product_name, current_bid, formatted_time_left))
+    
+    # Sort by time remaining (ascending)
+    products.sort(reverse=True, key=lambda x: x[2])
+
+    table = PrettyTable(["Product Name", "Current Bid", "Time Remaining"])
+    for product in products:
+        table.add_row([Fore.GREEN + product[0] + Style.RESET_ALL, Fore.YELLOW + str(product[1]) + Style.RESET_ALL, Fore.RED + product[2] + Style.RESET_ALL])
+
+    print(table)
+
+if __name__ == "__main__":
+    data = fetch_data()
+    print_product_info_sorted(data)
+
