@@ -1,7 +1,29 @@
-local overrides = require("custom.configs.overrides")
+local overrides = require "custom.configs.overrides"
 
 ---@type NvPluginSpec[]
 local plugins = {
+  {
+    "github/copilot.vim",
+    lazy = false,
+  },
+  -- {
+  --   "zbirenbaum/copilot.lua",
+  --   cmd = "Copilot",
+  --   event = "InsertEnter",
+  --   config = function()
+  --     require("copilot").setup({
+  --       suggestion = { enabled = false },
+  --       panel = { enabled = false },
+  --     })
+  --   end,
+  -- },
+  -- {
+  --   "zbirenbaum/copilot-cmp",
+  --   after = "zbirenbaum/copilot.lua",
+  --   config = function()
+  --     require("copilot_cmp").setup()
+  --   end,
+  -- },
   {
     "kawre/leetcode.nvim",
     build = ":TSUpdate html",
@@ -33,11 +55,11 @@ local plugins = {
     lazy = false,
   },
   {
-    'easymotion/vim-easymotion',
+    "easymotion/vim-easymotion",
     lazy = false,
     config = function()
-      vim.api.nvim_set_keymap('n', '<Leader>s', '<Plug>(easymotion-s2)', { noremap = true })
-    end
+      vim.api.nvim_set_keymap("n", "<Leader>s", "<Plug>(easymotion-s2)", { noremap = true })
+    end,
   },
   -- {
   --   'mg979/vim-visual-multi',
@@ -54,19 +76,19 @@ local plugins = {
   {
     "themaxmarchuk/tailwindcss-colors.nvim",
     lazy = true,
-    config = function ()
+    config = function()
       require("tailwindcss-colors").setup()
-    end
+    end,
   },
   {
     "kylechui/nvim-surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
     event = "VeryLazy",
     config = function()
-      require("nvim-surround").setup({
+      require("nvim-surround").setup {
         -- Configuration here, or leave empty to use defaults
-      })
-    end
+      }
+    end,
   },
   {
     "neovim/nvim-lspconfig",
@@ -88,7 +110,7 @@ local plugins = {
   -- override plugin configs
   {
     "williamboman/mason.nvim",
-    opts = overrides.mason
+    opts = overrides.mason,
   },
 
   {
@@ -101,9 +123,9 @@ local plugins = {
         "css",
         "javascript",
         "typescript",
-        "cpp"
-      }
-    }
+        "cpp",
+      },
+    },
   },
 
   {
@@ -125,14 +147,14 @@ local plugins = {
     lazy = false,
     init = function()
       vim.g.VM_maps = {
-        ["Find Under"] = "<C-g>"
+        ["Find Under"] = "<C-g>",
       }
     end,
   },
   {
     "dharmx/telescope-media.nvim",
     config = function()
-      require("telescope").setup({
+      require("telescope").setup {
         extensions = {
           media = {
             backend = "ueberzug", -- image/gif backend
@@ -143,13 +165,13 @@ local plugins = {
             },
             -- on_confirm_single = canned.single.copy_path,
             -- on_confirm_muliple = canned.multiple.bulk_copy,
-            cache_path = vim.fn.stdpath("cache") .. "/media",
+            cache_path = vim.fn.stdpath "cache" .. "/media",
           },
         },
-      })
-      require("telescope").load_extension("media")
+      }
+      require("telescope").load_extension "media"
     end,
-  }
+  },
   -- To make a plugin not be loaded
   -- {
   --   "NvChad/nvim-colorizer.lua",
