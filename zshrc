@@ -103,7 +103,7 @@ alias update="sudo apt update && sudo apt upgrade"
 # Source zsh extensions
 #source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 #source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-#xmodmap ~/.Xmodmap
+# xmodmap ~/.Xmodmap
 #export $QT_SCREEN_SCALE_FACTORS='eDP1=1;DP1=1;DP2=1;DP3=1;VIRTUAL1=1;'
 
 
@@ -119,6 +119,7 @@ alias vpns="sudo wg show"
 alias cdr="cd ~/Programming/React"
 alias upgrade="sudo pacman -Syu"
 alias cleancache="sudo pacman -Sc"
+alias deleteorphans="pacman -Qtdq | pacman -Rns -"
 alias enablenow="sudo systemctl enable --now"
 alias status="sudo systemctl status"
 alias disablenow="sudo systemctl disable"
@@ -143,9 +144,3 @@ export PATH="$PATH:/home/hidenori/.local/bin"
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 export PATH="$PATH:/home/hidenori/.local/ubin"
-
-
-# Start tmux
-if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
-  tmux new-session -A -s main
-fi

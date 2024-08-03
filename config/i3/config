@@ -173,7 +173,7 @@ bindsym $mod+r mode "resize"
 #}
 
 ### Set keybinds for dell XPS 15 ###
-exec xmodmap ~/.Xmodmap
+exec --no-startup-id xmodmap ~/.Xmodmap
 
 ### Create dropdown terminal ###
 exec --no-startup-id tilix --name dropdown &
@@ -207,8 +207,8 @@ bindsym $mod+l exec betterlockscreen -l #ilock
 
 
 ### Fix screentearing on dell XPS 15 ###
-exec picom --experimental-backends&
-
+# exec picom --experimental-backends&
+exec_always --no-startup-id picom -b --config ~/.config/picom/picom.conf
 
 ### Disable border ###
 for_window [class="^.*"] border pixel 0
