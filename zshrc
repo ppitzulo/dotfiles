@@ -130,6 +130,7 @@ alias ls="lsd"
 alias killkde="login terminate-session"
 alias listsesh="loginctl list-sessions"
 alias ls="lsd"
+alias cdg="cd $(git rev-parse --show-toplevel)"
 
 # WSL Configs
 
@@ -144,3 +145,7 @@ export PATH="$PATH:/home/hidenori/.local/bin"
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 export PATH="$PATH:/home/hidenori/.local/ubin"
+
+# Emscripten setup
+export EMSDK_QUIET=1
+source "/home/hidenori/.emsdk/emsdk_env.sh"

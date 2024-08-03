@@ -55,7 +55,11 @@ local plugins = {
     lazy = false,
   },
   {
-    "easymotion/vim-easymotion",
+    "github/copilot.vim",
+    lazy = false,
+  },
+  {
+    'easymotion/vim-easymotion',
     lazy = false,
     config = function()
       vim.api.nvim_set_keymap("n", "<Leader>s", "<Plug>(easymotion-s2)", { noremap = true })

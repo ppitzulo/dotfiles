@@ -26,7 +26,7 @@ class HexCalc:
                 self.decimals.append(int(arg))  # just append int
             elif arg == '-' or arg == '+':
                 self.decimals.append(arg)  # append the operator to the list
-            else:
+            elif arg != '-x':
                 print(f"Invalid number: {arg}")
                 sys.exit(1)
                 
@@ -47,7 +47,7 @@ class HexCalc:
             print("       python3 p.py -x <decimal_number>")
             print("\nSupported operations:")
             print("  - Add or subtract multiple hexadecimal or decimal numbers.")
-            print("  - Convert a single decimal number to hexadecimal using the -x flag.")
+            print("  - Convert a single decimal number or output of calcuation to hexadecimal using the -x flag.")
             sys.exit(1)
 
         if sys.argv[1] == '-x' and len(sys.argv) == 3:
