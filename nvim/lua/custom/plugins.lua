@@ -2,28 +2,61 @@ local overrides = require "custom.configs.overrides"
 
 ---@type NvPluginSpec[]
 local plugins = {
+  -- {
+  --   -- Install markdown preview, use npx if available.
+  --   "iamcco/markdown-preview.nvim",
+  --   cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+  --   ft = { "markdown" },
+  --   build = function(plugin)
+  --     if vim.fn.executable "npx" then
+  --       vim.cmd("!cd " .. plugin.dir .. " && cd app && npx --yes yarn install")
+  --     else
+  --       vim.cmd [[Lazy load markdown-preview.nvim]]
+  --       vim.fn["mkdp#util#install"]()
+  --     end
+  --   end,
+  --   init = function()
+  --     if vim.fn.executable "npx" then vim.g.mkdp_filetypes = { "markdown" } end
+  --   end,
+  -- },
+  -- install with yarn or npm
   {
-    "github/copilot.vim",
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    build = "cd app && yarn install",
+    init = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+    end,
+    ft = { "markdown" },
+  },
+  {
+    "ThePrimeagen/harpoon",
+    dependencies = { "nvim-lua/plenary.nvim" }
+  },
+  {
+    "zbirenbaum/copilot-cmp",
+    config = function()
+      require("copilot_cmp").setup()
+    end,
+  },
+  {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+      require("copilot").setup {
+        suggestion = { enabled = false },
+        panel = { enabled = false },
+      }
+    end,
+  },
+  {
+    "olrtg/nvim-emmet",
+    config = function()
+      vim.keymap.set({ "n", "v" }, "<leader>rw", require("nvim-emmet").wrap_with_abbreviation)
+    end,
     lazy = false,
   },
-  -- {
-  --   "zbirenbaum/copilot.lua",
-  --   cmd = "Copilot",
-  --   event = "InsertEnter",
-  --   config = function()
-  --     require("copilot").setup({
-  --       suggestion = { enabled = false },
-  --       panel = { enabled = false },
-  --     })
-  --   end,
-  -- },
-  -- {
-  --   "zbirenbaum/copilot-cmp",
-  --   after = "zbirenbaum/copilot.lua",
-  --   config = function()
-  --     require("copilot_cmp").setup()
-  --   end,
-  -- },
   {
     "kawre/leetcode.nvim",
     build = ":TSUpdate html",
@@ -61,18 +94,6 @@ local plugins = {
       vim.api.nvim_set_keymap("n", "<Leader>s", "<Plug>(easymotion-s2)", { noremap = true })
     end,
   },
-  -- {
-  --   'mg979/vim-visual-multi',
-  --   lazy = false,
-  --   config = function()
-  --     vim.g.VM_maps = {
-  --       ["Find Under"] = "<C-m>",
-  --       ["Find Subword Under"] = "<C-m>",
-  --     }
-  --     vim.api.nvim_set_keymap('n', '<C-m>', '<Plug>(VM-Find-Under)', { noremap = true, silent = true })
-  --     vim.api.nvim_set_keymap('x', '<C-m>', '<Plug>(VM-Find-Subword-Under)', { noremap = true, silent = true })
-  --   end
-  -- },
   {
     "themaxmarchuk/tailwindcss-colors.nvim",
     lazy = true,
