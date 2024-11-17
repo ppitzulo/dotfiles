@@ -28,6 +28,9 @@ M.override = {
   --   bg = get_hl("Normal").bg,
   --   fg = get_hl("CursorLineNr").fg,
   -- },
+  Normal = {
+    bg = "none",
+  },
 }
 
 ---@type HLTable

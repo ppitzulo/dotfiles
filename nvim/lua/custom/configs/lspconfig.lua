@@ -3,7 +3,7 @@ local capabilities = require("plugins.configs.lspconfig").capabilities
 
 local lspconfig = require "lspconfig"
 
-local servers = { "html", "cssls", "tsserver", "clangd", "pyright", "tailwindcss", "emmet_language_server" }
+local servers = { "html", "cssls", "ts_ls", "clangd", "pyright", "tailwindcss", "emmet_language_server" }
 
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.offsetEncoding = {"utf-16"}

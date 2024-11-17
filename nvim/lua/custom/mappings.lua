@@ -1,6 +1,6 @@
 ---@type MappingsTable
-local M = {}
 
+local M = {}
 M.general = {
   n = {
     ["<leader>a"] = { function() require("harpoon.mark").add_file() end, "Add file to Harpoon" },
@@ -16,6 +16,5 @@ M.general = {
   },
 }
 
--- more keybinds!
-
 return M
+

@@ -19,7 +19,17 @@ local plugins = {
   --     if vim.fn.executable "npx" then vim.g.mkdp_filetypes = { "markdown" } end
   --   end,
   -- },
-  -- install with yarn or npm
+  {
+    "Exafunction/codeium.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "hrsh7th/nvim-cmp",
+    },
+    lazy = false,
+    config = function()
+      require("codeium").setup {}
+    end,
+  }, -- install with yarn or npm
   {
     "iamcco/markdown-preview.nvim",
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
@@ -31,30 +41,45 @@ local plugins = {
   },
   {
     "ThePrimeagen/harpoon",
-    dependencies = { "nvim-lua/plenary.nvim" }
+    dependencies = { "nvim-lua/plenary.nvim" },
   },
-  {
-    "zbirenbaum/copilot-cmp",
-    config = function()
-      require("copilot_cmp").setup()
-    end,
-  },
-  {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    event = "InsertEnter",
-    config = function()
-      require("copilot").setup {
-        suggestion = { enabled = false },
-        panel = { enabled = false },
-      }
-    end,
-  },
+  -- {
+  --   "zbirenbaum/copilot-cmp",
+  --   config = function()
+  --     require("copilot_cmp").setup()
+  --   end,
+  -- },
+  -- {
+  --   "zbirenbaum/copilot.lua",
+  --   cmd = "Copilot",
+  --   event = "InsertEnter",
+  --   config = function()
+  --     require("copilot").setup {
+  --       suggestion = { enabled = false },
+  --       panel = { enabled = false },
+  --     }
+  --   end,
+  -- },
   {
     "olrtg/nvim-emmet",
     config = function()
       vim.keymap.set({ "n", "v" }, "<leader>rw", require("nvim-emmet").wrap_with_abbreviation)
     end,
+  },
+  -- {
+  --   "ThePrimeagen/harpoon",
+  --   branch = "harpoon2",
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --   },
+  --   config = function()
+  --     local harpoon = require("harpoon")
+  --     harpoon.setup()
+  --     vim.keymap.set("n", "<Leader>ll", function() harpoon.ui.toggle_quick_menu(harpoon:list()) end)
+  --   end,
+  -- },
+  {
+    "github/copilot.vim",
     lazy = false,
   },
   {

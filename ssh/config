@@ -1,6 +1,13 @@
 Host 192.168.0.2
   HostName 192.168.0.2
   User pongopeter826
+
 Host ppitzulo
   HostName github.com
-  User ppitzulo
+  User git
+  IdentityFile ~/.ssh/id_rsa
+  
+Host hidenori
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519
