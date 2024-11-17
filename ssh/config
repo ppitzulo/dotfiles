@@ -1,3 +1,6 @@
 Host 192.168.0.2
   HostName 192.168.0.2
   User pongopeter826
+Host ppitzulo
+  HostName github.com
+  User ppitzulo
