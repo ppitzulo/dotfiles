@@ -2,34 +2,6 @@ local overrides = require "custom.configs.overrides"
 
 ---@type NvPluginSpec[]
 local plugins = {
-  -- {
-  --   -- Install markdown preview, use npx if available.
-  --   "iamcco/markdown-preview.nvim",
-  --   cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-  --   ft = { "markdown" },
-  --   build = function(plugin)
-  --     if vim.fn.executable "npx" then
-  --       vim.cmd("!cd " .. plugin.dir .. " && cd app && npx --yes yarn install")
-  --     else
-  --       vim.cmd [[Lazy load markdown-preview.nvim]]
-  --       vim.fn["mkdp#util#install"]()
-  --     end
-  --   end,
-  --   init = function()
-  --     if vim.fn.executable "npx" then vim.g.mkdp_filetypes = { "markdown" } end
-  --   end,
-  -- },
-  {
-    "Exafunction/codeium.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "hrsh7th/nvim-cmp",
-    },
-    lazy = false,
-    config = function()
-      require("codeium").setup {}
-    end,
-  }, -- install with yarn or npm
   {
     "iamcco/markdown-preview.nvim",
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
@@ -43,44 +15,26 @@ local plugins = {
     "ThePrimeagen/harpoon",
     dependencies = { "nvim-lua/plenary.nvim" },
   },
-  -- {
-  --   "zbirenbaum/copilot-cmp",
-  --   config = function()
-  --     require("copilot_cmp").setup()
-  --   end,
-  -- },
-  -- {
-  --   "zbirenbaum/copilot.lua",
-  --   cmd = "Copilot",
-  --   event = "InsertEnter",
-  --   config = function()
-  --     require("copilot").setup {
-  --       suggestion = { enabled = false },
-  --       panel = { enabled = false },
-  --     }
-  --   end,
-  -- },
+  {
+    "zbirenbaum/copilot-cmp",
+    config = function()
+      require("copilot_cmp").setup()
+    end,
+  },
+  {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    lazy = true,
+    event = "InsertEnter",
+    config = function()
+      require("custom.configs.copilot").config()
+    end,
+  },
   {
     "olrtg/nvim-emmet",
     config = function()
       vim.keymap.set({ "n", "v" }, "<leader>rw", require("nvim-emmet").wrap_with_abbreviation)
     end,
-  },
-  -- {
-  --   "ThePrimeagen/harpoon",
-  --   branch = "harpoon2",
-  --   dependencies = {
-  --     "nvim-lua/plenary.nvim",
-  --   },
-  --   config = function()
-  --     local harpoon = require("harpoon")
-  --     harpoon.setup()
-  --     vim.keymap.set("n", "<Leader>ll", function() harpoon.ui.toggle_quick_menu(harpoon:list()) end)
-  --   end,
-  -- },
-  {
-    "github/copilot.vim",
-    lazy = false,
   },
   {
     "kawre/leetcode.nvim",
