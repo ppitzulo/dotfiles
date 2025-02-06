@@ -67,10 +67,6 @@ local plugins = {
     lazy = false,
   },
   {
-    "github/copilot.vim",
-    lazy = false,
-  },
-  {
     'easymotion/vim-easymotion',
     lazy = false,
     config = function()

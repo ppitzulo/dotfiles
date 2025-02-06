@@ -131,6 +131,7 @@ alias killkde="login terminate-session"
 alias listsesh="loginctl list-sessions"
 alias ls="lsd"
 alias cdg="cd $(git rev-parse --show-toplevel)"
+alias drundroot="cd /home/hidenori/Programming/code/drund"
 
 # WSL Configs
 
@@ -146,8 +147,11 @@ source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 export PATH="$PATH:/home/hidenori/.local/ubin"
 
+source /usr/share/nvm/init-nvm.sh
+
 # Emscripten setup
 export EMSDK_QUIET=1
 source "/home/hidenori/.emsdk/emsdk_env.sh"
 
 source /usr/share/nvm/init-nvm.sh
+
