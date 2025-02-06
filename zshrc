@@ -149,3 +149,5 @@ export PATH="$PATH:/home/hidenori/.local/ubin"
 # Emscripten setup
 export EMSDK_QUIET=1
 source "/home/hidenori/.emsdk/emsdk_env.sh"
+
+source /usr/share/nvm/init-nvm.sh
