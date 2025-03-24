@@ -2,7 +2,7 @@
 	email = plpitzulo@protonmail.com
 	name = Peter Pitzulo
 [core]
-	editor = nano
+	editor = nvim
 [init]
 	defaultBranch = main
 [credential]

@@ -2,6 +2,31 @@ local overrides = require "custom.configs.overrides"
 
 ---@type NvPluginSpec[]
 local plugins = {
+  -- {
+  --   "vimwiki/vimwiki",
+  --   event = "BufEnter *.md",
+  --   keys = { "<leader>ww", "<leader>wt" },
+  --   init = function()
+  --     vim.g.vimwiki_list = {{
+  --       path = "~/.vimwiki/",
+  --       syntax = "markdown",
+  --       ext = ".md",
+  --     }}
+  --     vim.g.vimwiki_ext2syntax = {}
+  --   end,
+  -- },
+  {
+    "vimwiki/vimwiki",
+    keys = { "<leader>ww", "<leader>wt", { "<leader>t", ":VimwikiToggleListItem<CR>", mode = "n", desc = "Toggle Vimwiki List Item" } },
+    init = function()
+      vim.g.vimwiki_list = { {
+        path = "~/.vimwiki",
+        syntax = "markdown",
+        ext = ".md",
+      } }
+    end,
+    lazy = false,
+  },
   {
     "iamcco/markdown-preview.nvim",
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
@@ -67,7 +92,7 @@ local plugins = {
     lazy = false,
   },
   {
-    'easymotion/vim-easymotion',
+    "easymotion/vim-easymotion",
     lazy = false,
     config = function()
       vim.api.nvim_set_keymap("n", "<Leader>s", "<Plug>(easymotion-s2)", { noremap = true })

@@ -132,6 +132,11 @@ alias listsesh="loginctl list-sessions"
 alias ls="lsd"
 alias cdg="cd $(git rev-parse --show-toplevel)"
 alias drundroot="cd /home/hidenori/Programming/code/drund"
+alias firefox="/mnt/c/Program\ Files/Mozilla\ Firefox/firefox.exe"
+alias iview="/mnt/c/Program\ Files/IrfanView/i_view64.exe"
+alias gn="git rev-parse --abbrev-ref HEAD"
+alias gls="git ls-files --modified"
+alias glsd="git ls-files --deleted"
 
 # WSL Configs
 
