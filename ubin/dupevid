@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# Directory to scan (default: current)
+DIR="${1:-.}"
+
+# Temporary file to store metadata
+TMPFILE=$(mktemp)
+
+# Find video files
+find "$DIR" -type f \( -iname "*.mp4" -o -iname "*.mkv" -o -iname "*.mov" -o -iname "*.avi" \) | while read -r FILE; do
+    # Extract resolution
+    RES=$(ffprobe -v error -select_streams v:0 -show_entries stream=width,height \
+          -of csv=p=0:s=x "$FILE" 2>/dev/null)
+
+    if [[ -n "$RES" ]]; then
+        FILENAME=$(basename "$FILE")
+        SIZE=$(stat -c "%s" "$FILE")
+        echo "$FILENAME|$RES|$FILE|$SIZE" >> "$TMPFILE"
+    fi
+done
+
+# Group by filename and resolution
+echo -e "\n🔍 Possible duplicates (same name and resolution):"
+sort "$TMPFILE" | uniq -d -f 0 | cut -d '|' -f1,2 | while IFS='|' read -r NAME RES; do
+    echo -e "\n📁 Duplicate set: $NAME ($RES)"
+    grep "^$NAME|$RES|" "$TMPFILE" | while IFS='|' read -r _ _ PATH SIZE; do
+        echo " - $PATH ($((SIZE/1024/1024)) MB)"
+    done
+done
+
+# Cleanup
+rm "$TMPFILE"
+

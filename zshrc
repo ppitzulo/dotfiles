@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/hidenori/.oh-my-zsh"
+export ZSH="/home/pongopeter826/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -106,11 +106,14 @@ alias update="sudo apt update && sudo apt upgrade"
 # xmodmap ~/.Xmodmap
 #export $QT_SCREEN_SCALE_FACTORS='eDP1=1;DP1=1;DP2=1;DP3=1;VIRTUAL1=1;'
 
+fastfetch
 
 ## fix tilix complaint
 if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
         source /etc/profile.d/vte.sh
 fi
+
+export AURUTILS_REPODIR="/home/pongopeter826/.aur/"
 
 alias zshrc="nano ~/.zshrc"
 alias vpnc="sudo wg-quick up peer2"
@@ -145,3 +148,6 @@ source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 export PATH="$PATH:/home/hidenori/.local/ubin"
 source /usr/share/nvm/init-nvm.sh
+
+# Created by `pipx` on 2024-09-06 01:38:40
+export PATH="$PATH:/home/pongopeter826/.local/bin"
